@@ -1,6 +1,8 @@
-import RandomUserLoader from "./components/random-user-loader";
+import PostInfo from "./components/post-info";
+import ResourceLoader from "./components/resource-loader";
 import UserInfo from "./components/user-info";
 import UserLoader from "./components/user-loader";
+import { API_ENDPOINTS } from "./constants/endpoints";
 
 function App() {
   return (
@@ -9,14 +11,20 @@ function App() {
 
       <div className="grid grid-cols-3">
         <div>
-          <RandomUserLoader>
+          <ResourceLoader
+            resourceUrl={`${API_ENDPOINTS.USERS}/1`}
+            resourceName="user"
+          >
             <UserInfo />
-          </RandomUserLoader>
+          </ResourceLoader>
         </div>
         <div>
-          <UserLoader userId={20}>
-            <UserInfo />
-          </UserLoader>
+          <ResourceLoader
+            resourceUrl={`${API_ENDPOINTS.POSTS}/1`}
+            resourceName="post"
+          >
+            <PostInfo />
+          </ResourceLoader>
         </div>
       </div>
     </main>
