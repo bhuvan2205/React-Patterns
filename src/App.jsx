@@ -1,5 +1,6 @@
 import ResourceLoaderWithRender from "./components/resource-loader-with-render";
 import UserInfo from "./components/user-info";
+import { getDataFromLocalStorage } from "./data/localStorage";
 import { fetchRandomUser } from "./data/user";
 
 function App() {
@@ -12,6 +13,12 @@ function App() {
           <ResourceLoaderWithRender
             getData={fetchRandomUser}
             render={(resource) => <UserInfo user={resource} />}
+          />
+        </div>
+        <div>
+          <ResourceLoaderWithRender
+            getData={() => getDataFromLocalStorage("test")}
+            render={(message) => <h3>{message}</h3>}
           />
         </div>
       </div>
