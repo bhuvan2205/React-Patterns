@@ -1,13 +1,11 @@
-function App() {
+const App = () => {
   return (
     <>
-      <div className="bg-red-200">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque aliquid
-        quod maxime culpa. Recusandae quia dignissimos tempora libero velit
-        ullam?
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold my-2">Design Patterns - React</h1>
       </div>
     </>
   );
-}
+};
 
 export default App;
