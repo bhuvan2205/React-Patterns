@@ -1,5 +1,7 @@
-import ControlledForm from "./components/controlled-form";
-import UncontrolledForm from "./components/uncontrolled-form";
+import UncontrolledFlow from "./components/uncontrolled-flow";
+import StepOne from "./components/step-one";
+import StepTwo from "./components/step-two";
+import StepThree from "./components/step-three";
 
 const App = () => {
   return (
@@ -7,17 +9,15 @@ const App = () => {
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold my-8">Design Patterns - React</h1>
 
-        <div className="grid grid-cols-2">
-          <div>
-            <h2 className="text-xl">UnControlled Form</h2>
-            <UncontrolledForm />
-          </div>
-
-          <div>
-            <h2 className="text-xl">Controlled Form</h2>
-            <ControlledForm />
-          </div>
-        </div>
+        <UncontrolledFlow
+          onDone={(data) =>
+            alert(`Completed the Flow with data: ${JSON.stringify(data)}`)
+          }
+        >
+          <StepOne />
+          <StepTwo />
+          <StepThree />
+        </UncontrolledFlow>
       </div>
     </>
   );
