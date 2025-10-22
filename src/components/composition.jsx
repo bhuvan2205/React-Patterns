@@ -1,4 +1,4 @@
-import React from "react";
+import PartialComponent from "./partial";
 
 export const Button = ({ size = "md", text, ...props }) => {
   return (
@@ -13,7 +13,5 @@ export const Button = ({ size = "md", text, ...props }) => {
   );
 };
 
-export const BlueButton = (props) => <Button {...props} />;
-export const BlueSmallButton = (props) => (
-  <Button color="blue" size="sm" {...props} />
-);
+export const BlueSmallButton = PartialComponent(Button, { size: "sm" });
+export const BlueMediumButton = PartialComponent(Button, { size: "md" });
