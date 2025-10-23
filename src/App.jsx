@@ -10,15 +10,15 @@ const App = () => {
 
         <div>
           {isShirt ? (
-            <>
+            <div>
               <span>Shirt Count:</span>
               <Counter />
-            </>
+            </div>
           ) : (
-            <>
+            <section>
               <span>Shoes Count:</span>
               <Counter />
-            </>
+            </section>
           )}
         </div>
 
