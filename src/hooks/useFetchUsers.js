@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { API_STATUS } from "../constants/apiStatus";
 import { fetchUsers } from "../api";
+import { useApiStatus } from "./useShowLoader";
 
 export const useFetchUsers = () => {
   const [users, setUsers] = useState([]);
   const [status, setStatus] = useState(API_STATUS.IDLE);
+  const { isLoading, isSuccess, isError } = useApiStatus({ status });
 
   const getUsers = async () => {
     setStatus(API_STATUS.LOADING);
@@ -18,5 +20,5 @@ export const useFetchUsers = () => {
     }
   };
 
-  return { users, status, getUsers };
+  return { users, status, getUsers, isLoading, isSuccess, isError };
 };

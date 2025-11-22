@@ -1,5 +1,7 @@
+import { ENDPOINTS } from "../constants/endpoints";
+
 export const fetchUsers = async () => {
-  const response = await fetch("https://dummyjson.com/users?limit=5");
+  const response = await fetch(ENDPOINTS.USERS);
   const data = await response.json();
   return data?.users;
 };

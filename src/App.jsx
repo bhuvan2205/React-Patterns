@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import UserList from "./components/UserList";
-import { API_STATUS } from "./constants/apiStatus";
 import { useFetchUsers } from "./hooks/useFetchUsers";
 
 const App = () => {
-  const { users, status, getUsers } = useFetchUsers();
+  const { users, getUsers, isLoading, isSuccess, isError } = useFetchUsers();
 
   useEffect(() => {
     getUsers();
@@ -17,8 +16,10 @@ const App = () => {
 
         <UserList
           users={users}
-          isLoading={status === API_STATUS.LOADING}
-          isSuccess={status === API_STATUS.SUCCESS}
+          getUsers={getUsers}
+          isError={isError}
+          isLoading={isLoading}
+          isSuccess={isSuccess}
         />
       </div>
     </>

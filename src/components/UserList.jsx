@@ -1,16 +1,23 @@
-import React from "react";
 import User from "./User";
 import Loader from "./Loader";
 
 const UserList = (props) => {
-  const { users, isLoading, isSuccess } = props || {};
+  const { users, isLoading, isSuccess, isError, getUsers } = props || {};
 
   return (
     <div className="sm:p-4 dark:text-gray-800">
-      <h2 className="mb-4 text-2xl font-semibold leading-tight">Users</h2>
+      <h2 className="mb-6 text-2xl font-semibold leading-tight flex items-center">
+        <button
+          onClick={getUsers}
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded-md cursor-pointer"
+        >
+          Get Users
+        </button>
+      </h2>
 
-      
       {isLoading && <Loader />}
+
+      {isError && <div className="text-red-500">Error fetching users</div>}
       {isSuccess && (
         <div className="overflow-x-auto">
           <table className="min-w-full text-xs">
