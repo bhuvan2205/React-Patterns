@@ -1,8 +1,9 @@
+import { useFetchUsers } from "../hooks/useFetchUsers";
+import { LazyLoader } from "./LazyLoader";
 import User from "./User";
-import Loader from "./Loader";
 
-const UserList = (props) => {
-  const { users, isLoading, isSuccess, isError, getUsers } = props || {};
+const UserList = () => {
+  const { users, getUsers, isLoading, isSuccess, isError } = useFetchUsers();
 
   return (
     <div className="sm:p-4 dark:text-gray-800">
@@ -15,7 +16,7 @@ const UserList = (props) => {
         </button>
       </h2>
 
-      {isLoading && <Loader />}
+      <LazyLoader show={isLoading} delay={500} />
 
       {isError && <div className="text-red-500">Error fetching users</div>}
       {isSuccess && (

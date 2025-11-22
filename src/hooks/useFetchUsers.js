@@ -1,24 +1,30 @@
 import { useState } from "react";
 import { API_STATUS } from "../constants/apiStatus";
 import { fetchUsers } from "../api";
-import { useApiStatus } from "./useShowLoader";
+import { useApiStatus } from "./useApiStatus";
+import { withAsync } from "../helpers/withAsync";
+import { useEffect } from "react";
 
 export const useFetchUsers = () => {
   const [users, setUsers] = useState([]);
-  const [status, setStatus] = useState(API_STATUS.IDLE);
-  const { isLoading, isSuccess, isError } = useApiStatus({ status });
+  const { setStatus, isLoading, isSuccess, isError } = useApiStatus(
+    API_STATUS.IDLE
+  );
 
   const getUsers = async () => {
     setStatus(API_STATUS.LOADING);
-    try {
-      const users = await fetchUsers();
-      setUsers(users);
-      setStatus(API_STATUS.SUCCESS);
-    } catch (error) {
-      console.error(error);
+    const { data, error } = await withAsync(() => fetchUsers());
+    if (error) {
       setStatus(API_STATUS.ERROR);
+      return;
     }
+    setUsers(data || []);
+    setStatus(API_STATUS.SUCCESS);
   };
 
-  return { users, status, getUsers, isLoading, isSuccess, isError };
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  return { users, getUsers, isLoading, isSuccess, isError };
 };
