@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { API_STATUS } from "../constants/apiStatus";
-import { fetchUsers } from "../api";
 import { useApiStatus } from "./useApiStatus";
 import { withAsync } from "../helpers/withAsync";
 import { useEffect } from "react";
+import { fetchUsers } from "../api/users";
 
 export const useFetchUsers = () => {
   const [users, setUsers] = useState([]);
