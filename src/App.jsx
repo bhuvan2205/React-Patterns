@@ -1,11 +1,34 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./components/Layout";
+import { lazy } from "react";
+
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+    ],
+  },
+]);
+
 const App = () => {
-  return (
-    <>
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold my-2">Design Patterns - React</h1>
-      </div>
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
