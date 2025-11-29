@@ -1,4 +1,4 @@
-import SubscribeForm from "./components/1-layer-pattern/SubscribeForm";
+import InfoForm from "./components/2-split-pattern/InfoForm";
 
 const App = () => {
   return (
@@ -6,7 +6,7 @@ const App = () => {
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold my-2">Design Patterns - React</h1>
 
-        <SubscribeForm />
+        <InfoForm />
       </div>
     </>
   );
