@@ -1,5 +1,5 @@
-import Layers from "./shared/layers";
-import { LayerSchema } from "../constants/layer";
+import Layers from "./layers";
+import { LayerSchema } from "./layer";
 
 const SubscribeForm = () => {
   return (

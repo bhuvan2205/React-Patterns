@@ -1,4 +1,4 @@
-import SubscribeForm from "./components/SubscribeForm";
+import SubscribeForm from "./components/1-layer-pattern/SubscribeForm";
 
 const App = () => {
   return (
