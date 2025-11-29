@@ -1,34 +1,43 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/Layout";
-import { lazy } from "react";
-
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "about",
-        element: <About />,
-      },
-      {
-        path: "contact",
-        element: <Contact />,
-      },
-    ],
-  },
-]);
+import { products as initialProducts } from "./data/product";
+import { useState } from "react";
+import { ProductList } from "./components/product-list";
+import { AddProduct } from "./components/add-product";
+import { useCallback } from "react";
+import { ProductHeader } from "./components/product-header";
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  const [product, setProduct] = useState({ name: "" });
+  const [products, setProducts] = useState(initialProducts);
+
+  const handleChange = (e) => {
+    setProduct({ ...product, [e.target.name]: e.target.value });
+  };
+
+  const handleAdd = () => {
+    setProducts([...products, { id: products.length + 1, name: product.name }]);
+    setProduct({ name: "" });
+  };
+
+  const handleDelete = useCallback((id) => {
+    setProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== id)
+    );
+  }, []);
+
+  return (
+    <div className="container mx-auto my-12">
+      <div className="flex flex-col gap-4 items-center justify-center">
+        <ProductHeader />
+        {products.length > 0 ? (
+          <ProductList products={products} onDelete={handleDelete} />
+        ) : (
+          <p className="text-gray-700">No products found</p>
+        )}
+
+        <AddProduct product={product} onChange={handleChange} onAdd={handleAdd} />
+      </div>
+    </div>
+  );
 };
 
 export default App;
